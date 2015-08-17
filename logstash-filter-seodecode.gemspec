@@ -1,6 +1,6 @@
 Gem::Specification.new do |s|
 
-  s.name            = 'logstash-filter-urldecode'
+  s.name            = 'logstash-filter-seo-keywords-decode'
   s.version         = '1.0.0'
   s.licenses        = ['Apache License (2.0)']
   s.summary         = "The urldecode filter is for decoding fields that are urlencoded."

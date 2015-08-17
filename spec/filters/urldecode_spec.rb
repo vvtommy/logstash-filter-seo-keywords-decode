@@ -1,15 +1,15 @@
 # encoding: utf-8
 
 require "logstash/devutils/rspec/spec_helper"
-require "logstash/filters/urldecode"
+require "logstash/filters/seodecode"
 
-describe LogStash::Filters::Urldecode do
+describe LogStash::Filters::Seodecode do
   describe "urldecode of correct urlencoded data" do
     # The logstash config goes here.
     # At this time, only filters are supported.
     config <<-CONFIG
       filter {
-        urldecode {
+        seodecode {
         }
       }
     CONFIG
@@ -22,7 +22,7 @@ describe LogStash::Filters::Urldecode do
   describe "urldecode of incorrect urlencoded data" do
     config <<-CONFIG
       filter {
-        urldecode {
+        seodecode {
         }
       }
     CONFIG
@@ -37,7 +37,7 @@ describe LogStash::Filters::Urldecode do
     # At this time, only filters are supported.
     config <<-CONFIG
       filter {
-        urldecode {
+        seodecode {
           all_fields => true
         }
       }
@@ -52,7 +52,7 @@ describe LogStash::Filters::Urldecode do
    describe "urldecode should replace invalid UTF-8" do
      config <<-CONFIG
       filter {
-        urldecode {}
+        seodecode {}
       }
      CONFIG
      sample("message" => "/a/sa/search?rgu=0;+%C3%BB%D3%D0%D5%D2%B5%BD=;+%B7%A2%CB%CD=") do

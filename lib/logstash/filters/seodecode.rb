@@ -3,10 +3,11 @@ require "logstash/filters/base"
 require "logstash/namespace"
 require "logstash/util/charset"
 require "uri"
+require "kconv"
 
 # The urldecode filter is for decoding fields that are urlencoded.
-class LogStash::Filters::Urldecode < LogStash::Filters::Base
-  config_name "urldecode"
+class LogStash::Filters::Seodecode < LogStash::Filters::Base
+  config_name "seodecode"
 
   # The field which value is urldecoded
   config :field, :validate => :string, :default => "message"
@@ -48,6 +49,10 @@ class LogStash::Filters::Urldecode < LogStash::Filters::Base
     case value
     when String
       escaped = URI.unescape(value)
+      unless escaped.isutf8()
+        converter=LogStash::Util::Charset.new('GBK')
+        return converter.convert(escaped)
+      end
       return @converter.convert(escaped)
     when Array
       ret_values = []
